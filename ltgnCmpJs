@@ -1,0 +1,26 @@
+({
+
+    handleLoad:function(cmp,evt,h){
+        cmp.set("v.spinner",false);
+    },
+    
+    handleSubmit:function(cmp,evt,h){
+        cmp.set("v.spinner",true);
+    },
+    
+    handleError:function(cmp,evt,h){
+        cmp.set("v.spinner",false);
+    },
+    
+    handleSuccess:function(cmp,evt,h){
+        var params = evt.getParams();
+        var qId = params.response.id; // quote Id
+        // create a url to the new quote's line items
+        var url = '/apex/sbqq__sb?scontrolCaching=1&id=' +qId+'#quote/le?qId='+qId;
+        var redirect = $A.get("e.force:navigateToURL");
+        redirect.setParams({ "url": url });
+        // redirect the current user's page to the line items
+        redirect.fire();
+    },
+
+})
