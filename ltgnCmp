@@ -1,0 +1,62 @@
+<aura:component implements="lightning:availableForFlowScreens,force:lightningQuickActionWithoutHeader,force:hasRecordId,force:hasSObjectName" access="Global">
+    <!-- attributes -->
+    <aura:attribute name="disabled" type="Boolean" default="false" />
+    <aura:attribute name="spinner" type="Boolean" default="true" />
+    <aura:attribute name="opp" type="Opportunity" />
+    <!-- attributes -->
+    
+    <!-- handlers -->
+    <!--aura:handler name="init" value="{!this}" action="{!c.doInit}"/ -->
+    <!-- handlers -->
+
+    <!-- body -->
+    <lightning:spinner aura:id="spinner" alternativeText="Loading Quote." class="{! (v.spinner?'slds-show':'slds-hide')}" />
+    
+    <lightning:recordEditForm onload="{!c.handleLoad}"
+                              onsubmit="{!c.handleSubmit}"
+                              onsuccess="{!c.handleSuccess}"
+                              onerror="{!c.handleError}"
+                              objectApiName="SBQQ__Quote__c">
+        <lightning:messages />
+        <div class="slds-grid slds-grid_align-space slds-wrap">
+            <div class="slds-col slds-size_1-of-2" id="r0c0">
+                <lightning:inputField fieldName="SBQQ__Primary__c" />
+            </div>
+            <div class="slds-col slds-size_1-of-2" id="r0c1">
+                <lightning:inputField fieldName="SBQQ__ExpirationDate__c" />
+            </div>
+            <div class="slds-col slds-size_1-of-2" id="r1c0">
+                <lightning:inputField fieldName="SBQQ__PrimaryContact__c" value="{!v.opp.Primary_Contact__c}"/>
+            </div>
+            <div class="slds-col slds-size_1-of-2" id="r1c1">
+                <lightning:inputField fieldName="SBQQ__StartDate__c" />
+            </div>
+            
+            <div class="slds-col slds-size_1-of-2" id="r2c0">
+                <lightning:inputField fieldName="Accounting_Contact__c" />
+            </div>
+            <div class="slds-col slds-size_1-of-2" id="r2c1">
+                <lightning:inputField fieldName="SBQQ__FirstSegmentTermEndDate__c" />
+            </div>
+            
+            <div class="slds-col slds-size_1-of-2" id="r3c0">
+                <lightning:inputField fieldName="SBQQ__EndDate__c" />
+            </div>
+            <div class="slds-col slds-size_1-of-2" id="r3c1">
+                <lightning:inputField fieldName="SBQQ__SubscriptionTerm__c" />
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-hide" id="r4c0" >
+                <lightning:inputField fieldName="SBQQ__Account__c" value="{!v.opp.AccountId}"  />
+                <lightning:inputField fieldName="SBQQ__Opportunity2__c" value="{!v.opp.Id}" />
+                <lightning:inputField fieldName="Quote_Name__c" value="{!v.opp.Name}" />
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-clearfix slds-p-top_small">
+                <div class="slds-float_right">
+                    <lightning:button disabled="{!v.spinner}" variant="brand" type="submit" name="save" label="Save" />
+                </div>
+            </div>
+        </div>
+        
+    </lightning:recordEditForm>
+    <!-- body -->
+</aura:component>
