@@ -1,0 +1,8 @@
+<design:component>
+    <design:attribute name="opp" label="OpportunityRecord"/>
+    
+    <sfdc:objects>
+        <sfdc:object>Opportunity</sfdc:object>
+    </sfdc:objects>
+
+</design:component>
